@@ -1,0 +1,1 @@
+# Object and Array Destructuring in JavaScript. ES6 | ES2015
