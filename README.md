@@ -16,3 +16,5 @@ Tyler's React Fundamentals Video Project with Modern JavaScript
 [06. Arrow Functions in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/ch.06/06)
 
 [07. Default Parameters in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/ch.07/07)
+
+[08. Compiling vs Polyfills with Babel](https://github.com/xgirma/reactor01/tree/ch.08/08)
