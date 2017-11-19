@@ -1,5 +1,56 @@
 # Refactoring
 
+        Destructing props
+        shorthand property
+        remove bind
+        destructure state
+        
+## Example Destructing props
+From: 
+```javascript
+function Profile (props){
+    let info = props.info;
+
+    return (
+        <div>
+           <PlayerPreview avatar={info.avatar_url} username={info.login}>
+               <ul className='space-list-items'>
+                   {info.name && <li>{info.name}</li>}
+                   {info.location && <li>{info.location}</li>}
+                   {info.company && <li>{info.company}</li>}
+                   <li>Followers: {info.followers}</li>
+                   <li>Following: {info.following}</li>
+                   <li>Public Repos: {info.public_repos}</li>
+                   {info.blog && <li><a href={info.blog}>{info.blog}</a></li>}
+               </ul>
+           </PlayerPreview>
+        </div>
+    )
+}
+```
+To: 
+```javascript
+function Profile ({info}){
+    const {avatar_url,login, name, location, company, followers, following, public_repos, blog } = info;
+
+    return (
+        <div>
+           <PlayerPreview avatar={avatar_url} username={login}>
+               <ul className='space-list-items'>
+                   {name && <li>{name}</li>}
+                   {location && <li>{location}</li>}
+                   {company && <li>{company}</li>}
+                   <li>Followers: {followers}</li>
+                   <li>Following: {following}</li>
+                   <li>Public Repos: {public_repos}</li>
+                   {blog && <li><a href={blog}>{blog}</a></li>}
+               </ul>
+           </PlayerPreview>
+        </div>
+    )
+}
+```
+
 ## API 
 From:
 ```javascript

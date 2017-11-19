@@ -3,7 +3,7 @@ const PropTypes = require('prop-types');
 const api = require('./../utils/api');
 const Loading = require('./Loading');
 
-function SelectLanguage (props) {
+function SelectLanguage({selectedLanguage, onSelect}) {
     // console.log(this); // undefined
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
     return (
@@ -12,9 +12,9 @@ function SelectLanguage (props) {
                 {languages.map((lang) => {
                     return (
                         <li
-                            style={lang === props.selectedLanguage? { color: '#d0021b'}: null}
+                            style={lang === selectedLanguage ? {color: '#d0021b'} : null}
                             key={lang}
-                            onClick={props.onSelect.bind(null, lang)}>
+                            onClick={() => onSelect(lang)}>
                             {lang}
                         </li>
                     )
@@ -24,27 +24,26 @@ function SelectLanguage (props) {
     )
 }
 
-function RepoGrid (props) {
+function RepoGrid({repos}) {
     return (
         <ul className='popular-list'>
-            {props.repos.map(function (repo, index) {
-                return (
-                    <li key={repo.name} className='popular-item'>
-                        <div className='popular-rank'>#{index + 1}</div>
-                        <ul className='space-list-items'>
-                            <li>
-                                <img
-                                    className='avatar'
-                                    src={repo.owner.avatar_url}
-                                    alt={'Avatar for ' + repo.owner.login}
-                                />
-                            </li>
-                            <li><a href={repo.html_url}>{repo.name}</a></li>
-                            <li>@{repo.owner.login}</li>
-                            <li>{repo.stargazers_count} stars</li>
-                        </ul>
-                    </li>
-                )
+            {repos.map(({name, stargazers_count, owner, html_url}, index) => (
+                <li key={name} className='popular-item'>
+                    <div className='popular-rank'>#{index + 1}</div>
+                    <ul className='space-list-items'>
+                        <li>
+                            <img
+                                className='avatar'
+                                src={owner.avatar_url}
+                                alt={'Avatar for ' + owner.login}
+                            />
+                        </li>
+                        <li><a href={html_url}>{name}</a></li>
+                        <li>@{owner.login}</li>
+                        <li>{stargazers_count} stars</li>
+                    </ul>
+                </li>
+            ))
             })}
         </ul>
     )
@@ -75,33 +74,28 @@ class Popular extends React.Component {
     }
 
     updateLanguage(lang) {
-        this.setState( function() {
-            return {
-                selectedLanguage: lang
-            }
-        });
+        this.setState(() => ( {
+            selectedLanguage: lang,
+            repos: null
+        }));
 
         api.fetchPopularRepos(lang)
-            .then(function (repos) {
-                this.setState(function(){
-                    return {
-                        repos: repos
-                    }
-                })
-            }.bind(this));
+            .then((repos) => {
+                this.setState(() => ({ repos})) // shorthand property
+            });
     }
 
     render() {
-
+        const {selectedLanguage, repos} = this.state;
         return (
             <div>
-                <SelectLanguage selectedLanguage={this.state.selectedLanguage}
+                <SelectLanguage selectedLanguage={selectedLanguage}
                                 onSelect={this.updateLanguage}
                 />
 
-                {!this.state.repos
-                    ? <Loading text='Downloading' />
-                    : <RepoGrid repos={this.state.repos} />}
+                {!repos
+                    ? <Loading text='Downloading'/>
+                    : <RepoGrid repos={repos}/>}
             </div>
         );
     }
