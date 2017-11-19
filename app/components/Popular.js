@@ -3,8 +3,7 @@ const PropTypes = require('prop-types');
 const api = require('./../utils/api');
 const Loading = require('./Loading');
 
-function SelectLanguage({selectedLanguage, onSelect}) {
-    // console.log(this); // undefined
+function SelectLanguage ({ selectedLanguage, onSelect}) {
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
     return (
         <div>
@@ -12,7 +11,7 @@ function SelectLanguage({selectedLanguage, onSelect}) {
                 {languages.map((lang) => {
                     return (
                         <li
-                            style={lang === selectedLanguage ? {color: '#d0021b'} : null}
+                            style={lang === selectedLanguage? { color: '#d0021b'}: null}
                             key={lang}
                             onClick={() => onSelect(lang)}>
                             {lang}
@@ -24,10 +23,10 @@ function SelectLanguage({selectedLanguage, onSelect}) {
     )
 }
 
-function RepoGrid({repos}) {
+function RepoGrid ({ repos }) {
     return (
         <ul className='popular-list'>
-            {repos.map(({name, stargazers_count, owner, html_url}, index) => (
+            {repos.map(({ name, owner, html_url, stargazers_count }, index) => (
                 <li key={name} className='popular-item'>
                     <div className='popular-rank'>#{index + 1}</div>
                     <ul className='space-list-items'>
@@ -43,8 +42,7 @@ function RepoGrid({repos}) {
                         <li>{stargazers_count} stars</li>
                     </ul>
                 </li>
-            ))
-            })}
+            ))}
         </ul>
     )
 }
@@ -74,19 +72,15 @@ class Popular extends React.Component {
     }
 
     updateLanguage(lang) {
-        this.setState(() => ( {
-            selectedLanguage: lang,
-            repos: null
-        }));
+        this.setState(() => ({selectedLanguage: lang}));
 
         api.fetchPopularRepos(lang)
-            .then((repos) => {
-                this.setState(() => ({ repos})) // shorthand property
-            });
+            .then((repos) => this.setState(() => ({repos})));
     }
 
     render() {
-        const {selectedLanguage, repos} = this.state;
+        const { selectedLanguage, repos } = this.state;
+
         return (
             <div>
                 <SelectLanguage selectedLanguage={selectedLanguage}
@@ -94,8 +88,8 @@ class Popular extends React.Component {
                 />
 
                 {!repos
-                    ? <Loading text='Downloading'/>
-                    : <RepoGrid repos={repos}/>}
+                    ? <Loading text='Downloading' />
+                    : <RepoGrid repos={repos} />}
             </div>
         );
     }

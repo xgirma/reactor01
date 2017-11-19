@@ -1,57 +1,73 @@
-# Refactoring
+# Refactoring 
 
-        Destructing props
-        shorthand property
-        remove bind
-        destructure state
-        
-## Example Destructing props
-From: 
+    01. String template
+    02. Arrow function: implicit return
+    03. Destructuring object
+    04. Destructing array
+    05. Shorthand notation
+    06. Remove keyword function
+    07. Grab props and states top of render method
+    08. Computed property name
+    09. Use arrow function instead of bind
+    10. Change if/else statement into a ternary
+    11. Destruct props of functional componnts
+    12. Var used only once
+    
+## String template 
+From:
 ```javascript
-function Profile (props){
-    let info = props.info;
-
-    return (
-        <div>
-           <PlayerPreview avatar={info.avatar_url} username={info.login}>
-               <ul className='space-list-items'>
-                   {info.name && <li>{info.name}</li>}
-                   {info.location && <li>{info.location}</li>}
-                   {info.company && <li>{info.company}</li>}
-                   <li>Followers: {info.followers}</li>
-                   <li>Following: {info.following}</li>
-                   <li>Public Repos: {info.public_repos}</li>
-                   {info.blog && <li><a href={info.blog}>{info.blog}</a></li>}
-               </ul>
-           </PlayerPreview>
-        </div>
-    )
+function getProfile (username) {
+    return axios.get('https://api.github.com/users/' + username)
+        .then(function (user) {
+            return user.data;
+        })
 }
 ```
-To: 
-```javascript
-function Profile ({info}){
-    const {avatar_url,login, name, location, company, followers, following, public_repos, blog } = info;
+To:
+````javascript
+function getProfile (username) {
+    return axios.get(`https://api.github.com/users/${username}`)
+        .then(function (user) {
+            return user.data;
+        })
+}
+````
 
-    return (
-        <div>
-           <PlayerPreview avatar={avatar_url} username={login}>
-               <ul className='space-list-items'>
-                   {name && <li>{name}</li>}
-                   {location && <li>{location}</li>}
-                   {company && <li>{company}</li>}
-                   <li>Followers: {followers}</li>
-                   <li>Following: {following}</li>
-                   <li>Public Repos: {public_repos}</li>
-                   {blog && <li><a href={blog}>{blog}</a></li>}
-               </ul>
-           </PlayerPreview>
-        </div>
-    )
+## Arrow function implicit return
+From
+```javascript
+function getProfile (username) {
+    return axios.get(`https://api.github.com/users/${username}`)
+        .then(function (user) {
+            return user.data;
+        })
+}
+```
+To:
+```javascript
+function getProfile (username) {
+    return axios.get(`https://api.github.com/users/${username}`)
+        .then((user) =>  user.data)
 }
 ```
 
-## API 
+## Destructuring Object
+From:
+```javascript
+function getProfile (username) {
+    return axios.get(`https://api.github.com/users/${username}`)
+        .then((user) =>  user.data)
+}
+```
+To:
+```javascript
+function getProfile (username) {
+    return axios.get(`https://api.github.com/users/${username}`)
+        .then(({ data }) =>  data)
+}
+```
+
+## Destructing array
 From:
 ```javascript
 function getUserData (player) {
@@ -69,97 +85,69 @@ function getUserData (player) {
     })
 }
 ```
-
-We can just use native `Promise.all()`. but Promises are `transpiled`. So we need to include Promise with Babel polyfill. 
-If we want to be able to support older browsers. 
-
-            npm install babel-polyfill
-            
-And make sure the polyfill is included in all of our code, using `webpack.config.js` entry point the first item is going 
-to be `babel-polyfill`. Because native Promise do not come with `babel-loader`.
-
-```javascript
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
-
-let config = {
-    entry: ['babel-polyfill', './app/index.js'], // ***
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'index_bundle.js',
-        publicPath: "/"
-    },
-    module: {
-        rules: [
-            {test: /\.(js)$/, use: 'babel-loader'},
-            {test: /\.css$/, use: ['style-loader', 'css-loader']}
-        ]
-    }, // more ...
-};
-```
-
+To:
 ```javascript
 function getUserData (player) {
     return Promise.all([
         getProfile(player),
         getRepos(player)
-    ]).then(([ profile, repos ]) => ({
-        profile,
-        score: calculateScore(profile, repos)
+    ]).then(([profile, repos]) => ({ // ***
+            profile: profile,
+            score: calculateScore(profile, repos)
     }))
 }
 ```
 
-## Battle.js
-From 
+## Shorthand Notation
+From
 ```javascript
-
-```
-To 
-```javascript
-handleChange(event){
-    const value = event.target.value;
-
-    this.setState(() => ({ username: value }))
+function getUserData (player) {
+    return Promise.all([
+        getProfile(player),
+        getRepos(player)
+    ]).then(([profile, repos]) => ({ // ***
+            profile: profile,
+            score: calculateScore(profile, repos)
+    }))
 }
 ```
-One thing you have to be careful with React, you can not really do the below to `events` in React specifically. 
-
+To
 ```javascript
-handleChange(event){
-    this.setState(() => ({ username: event.target.value })) // wrong
+function getUserData (player) {
+    return Promise.all([
+        getProfile(player),
+        getRepos(player)
+    ]).then(([profile, repos]) => ({
+            profile, // ***
+            score: calculateScore(profile, repos)
+    }))
 }
 ```
-What is going to happen here, by the time the callback `() => ({ username: event.target.value })` function runs, this event
-will be long gone. Whenever you need to pass event to a `setState` you need to make sure to capture the `event` in a variable. 
 
-More example: 
-From;
+## Remove keyword function
+From:
 ```javascript
-handleSubmit(event){
-    event.preventDefault();
-
-    this.props.onSubmit(
-        this.props.id,
-        this.state.username
-    )
-}
+module.exports = {
+    battle: function (players) {
+        return Promise.all(players.map(getUserData))
+            .then(sortPlayers)
+            .catch(handleError)
+    },
+};
 ```
 To:
-```javascript
-    handleSubmit(preventDefault){ // wrong
-        this.props.onSubmit(
-            this.props.id,
-            this.state.username
-        )
-    }
-```
-Destructuring `preventDefault` is not going to work, I do not know why. 
+````javascript
+module.exports = {
+    battle (players) {
+        return Promise.all(players.map(getUserData))
+            .then(sortPlayers)
+            .catch(handleError)
+    },
+};
+````
 
-I like to get all my props at the top inside render.
-
-From: 
+## Grab props and states top of render method
+From
 ```javascript
 render() {
     return (
@@ -181,13 +169,13 @@ render() {
         </form>
     )
 }
-``` 
-To:
+```
+To
 ```javascript
 render() {
     const { username } = this.state;
     const { label } = this.props;
-    
+
     return (
         <form className='column' onSubmit={this.handleSubmit}>
             <label className='header' htmlFor='username'>{label}</label>
@@ -208,37 +196,34 @@ render() {
     )
 }
 ```
-
+# Computed property name
 From:
 ```javascript
 handleSubmit(id, username) {
-        this.setState(function(){
-            let newState = {};
-            newState[id + 'Name'] = username;
-            newState[id + 'Image'] = 'http://github.com/' + username + '.png?size=200';
-            return newState; // merge the new state
-        });
-    }
+    this.setState(function(){
+        let newState = {};
+        newState[id + 'Name'] = username;
+        newState[id + 'Image'] = 'http://github.com/' + username + '.png?size=200';
+        return newState; // merge the new state
+    });
+}
 ```
-
 To:
 ```javascript
 handleSubmit(id, username) {
-    this.setState(() => ({
-        [id + 'Name'] : username,
-        [id + 'Image'] : `http://github.com/'${username}.png?size=200`
-    }))
-}
+        this.setState(() => ({
+            [id + 'Name'] : username,
+            [id + 'Image'] : `http://github.com/${username}.png?size=200`
+        }))
+    }
 ```
 
-From: 
+## Use arrow function instead of bind
+From
 ```javascript
 render() {
-    let match = this.props.match;
-    let playerOneName = this.state.playerOneName;
-    let playerTwoName = this.state.playerTwoName;
-    let playerOneImage = this.state.playerOneImage;
-    let playerTwoImage = this.state.playerTwoImage;
+    let { match } = this.props;
+    const { playerOneName, playerTwoName, playerOneImage, playerTwoImage } = this.state;
 
     return (
         <div>
@@ -263,47 +248,16 @@ render() {
 
                 </PlayerPreview>
                 }
-
-                {!playerTwoName &&
-                <PlayerInput
-                    id='playerTwo'
-                    label='Player Two'
-                    onSubmit={this.handleSubmit}
-                />}
-
-                {playerTwoImage !== null &&
-                <PlayerPreview
-                    avatar={playerTwoImage}
-                    username={playerTwoName}
-                >
-                    <button
-                        className='reset'
-                        onClick={this.handleReset.bind(this, 'playerTwo')}>
-                        Reset
-                    </button>
-                </PlayerPreview>
-                }
             </div>
-
-            {playerOneImage && playerTwoImage &&
-            <Link
-                className='button'
-                to={{
-                    pathname: match.url + '/results',
-                    search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
-                }}> Battle
-            </Link>
-            }
         </div>
     )
 }
 ```
-
-To
+To: 
 ```javascript
 render() {
-    const { match } = this.props; // ***
-    const {playerOneName, playerTwoName, playerOneImage, playerTwoImage} = this.state; // ***
+    let { match } = this.props;
+    const { playerOneName, playerTwoName, playerOneImage, playerTwoImage } = this.state;
 
     return (
         <div>
@@ -322,70 +276,113 @@ render() {
                 >
                     <button
                         className='reset'
-                        onClick={ () => this.handleReset('playerOne')}> // ***
+                        onClick={() => this.handleReset('playerOne')}>
                         Reset
                     </button>
 
-                </PlayerPreview>
-                }
-
-                {!playerTwoName &&
-                <PlayerInput
-                    id='playerTwo'
-                    label='Player Two'
-                    onSubmit={this.handleSubmit}
-                />}
-
-                {playerTwoImage !== null &&
-                <PlayerPreview
-                    avatar={playerTwoImage}
-                    username={playerTwoName}
-                >
-                    <button
-                        className='reset'
-                        onClick={() => this.handleReset('playerTwo')}> // ***
-                        Reset
-                    </button>
                 </PlayerPreview>
                 }
             </div>
-
-            {playerOneImage && playerTwoImage &&
-            <Link
-                className='button'
-                to={{
-                    pathname: match.url + '/results',
-                    search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}` 
-                }}> Battle
-            </Link>
-            }
         </div>
     )
 }
 ```
-## Loading.js
-From:
+
+# Change if/else statement into a ternary
+From 
 ```javascript
 componentDidMount() {
-        let stopper = this.props.text + '...';
-        this.interval = window.setInterval(function() {
-            if(this.state.text === stopper){
-                this.setState(function () {
-                    return {
-                        text: this.props.text
-                    }
-                })
-            } else {
-                this.setState(function(previousState) {
-                    return {
-                        text: previousState.text + '.'
-                    }
-                })
-            }
-        }.bind(this), this.props.speed)
-    }
+    let stopper = this.props.text + '...';
+    this.interval = window.setInterval(function() {
+        if(this.state.text === stopper){
+            this.setState(function () {
+                return {
+                    text: this.props.text
+                }
+            })
+        } else {
+            this.setState(function(previousState) {
+                return {
+                    text: previousState.text + '.'
+                }
+            })
+        }
+    }.bind(this), this.props.speed)
+}
+```
+To
+```javascript
+componentDidMount() {
+    const { text, speed } = this.props;
+    const stopper = text + '...';
+
+    this.interval = window.setInterval(() => {
+        this.state.text === stopper
+            ? this.setState(() => ({ text }))
+            : this.setState((previousState) => ({ text: previousState.text + '.' }))
+
+    }, speed)
+}
+```
+# Destruct props of functional componnts
+From
+```javascript
+function SelectLanguage (props) {
+    const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
+    return (
+        <div>
+            <ul className='languages'>
+                {languages.map((lang) => {
+                    return (
+                        <li
+                            style={lang === props.selectedLanguage? { color: '#d0021b'}: null}
+                            key={lang}
+                            onClick={props.onSelect.bind(null, lang)}>
+                            {lang}
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
+    )
+}
+```
+To
+```javascript
+function SelectLanguage ({ selectedLanguage, onSelect}) { // :v: :v: :v:
+    const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
+    return (
+        <div>
+            <ul className='languages'>
+                {languages.map((lang) => {
+                    return (
+                        <li
+                            style={lang === selectedLanguage? { color: '#d0021b'}: null}
+                            key={lang}
+                            onClick={() => onSelect(lang)}>
+                            {lang}
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
+    )
+}
+```
+
+## Var used only once
+From
+```javascript
+function calculateScore (profile, repos) {
+    let followers = profile.followers;
+    let totalStars = getStarCount(repos);
+
+    return (followers * 3) + totalStars;
+}
 ```
 To:
 ```javascript
-
+function calculateScore ({ followers }, repos) {
+    return (followers * 3) + getStarCount(repos);
+}
 ```
