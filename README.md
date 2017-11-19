@@ -19,4 +19,4 @@ Tyler's React Fundamentals Video Project with Modern JavaScript
 
 [08. Compiling vs Polyfills with Babel](https://github.com/xgirma/reactor01/tree/ch.08/08)
 
-
+[09. Refactor](https://github.com/xgirma/reactor01/tree/ch.09/09)
