@@ -22,3 +22,5 @@ Tyler's React Fundamentals Video Project with Modern JavaScript
 [09. Refactor](https://github.com/xgirma/reactor01/tree/ch.09/09)
 
 [10. Class Properties (Class Fields) in JavaScript](https://github.com/xgirma/reactor01/tree/ch.11/11)
+
+[11. Async Await in JavaScript (ES2017)](https://github.com/xgirma/reactor01/tree/ch.12/12)
