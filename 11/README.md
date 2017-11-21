@@ -1,7 +1,8 @@
 # Class Properties (Class Fields) in JavaScript
 
-    [add class properties transform from babel](https://babeljs.io/docs/plugins/transform-class-properties/)
+   >[add class properties transform from babel](https://babeljs.io/docs/plugins/transform-class-properties/)
     
+Example: 
 ```javascript
   class Bork {
     //Property initializer syntax
