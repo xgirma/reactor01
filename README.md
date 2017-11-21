@@ -20,3 +20,5 @@ Tyler's React Fundamentals Video Project with Modern JavaScript
 [08. Compiling vs Polyfills with Babel](https://github.com/xgirma/reactor01/tree/ch.08/08)
 
 [09. Refactor](https://github.com/xgirma/reactor01/tree/ch.09/09)
+
+[10. Class Properties (Class Fields) in JavaScript](https://github.com/xgirma/reactor01/tree/ch.11/11)
