@@ -5,6 +5,7 @@ import { battle } from'../utils/api';
 import { Link } from'react-router-dom';
 import PlayerPreview from'./PlayerPreview';
 import Loading from'./Loading';
+import Footer from './Footer';
 
 function Profile ({ info }) {
     return (
@@ -99,6 +100,7 @@ class Results extends React.Component {
                     score={loser.score}
                     profile={loser.profile}
                 />
+                <Footer/>
             </div>
         )
     }

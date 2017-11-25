@@ -143,3 +143,15 @@ li {
 .reset:hover {
     cursor: pointer;
 }
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    color: #d0021b;
+    font-size: 12px;
+    flex-shrink: 0;
+}

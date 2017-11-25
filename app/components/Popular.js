@@ -2,6 +2,7 @@ import React from'react';
 import PropTypes from'prop-types';
 import { fetchPopularRepos } from'../utils/api';
 import Loading from'./Loading';
+import Footer from './Footer';
 
 function SelectLanguage ({ selectedLanguage, onSelect }) {
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
@@ -83,6 +84,7 @@ class Popular extends React.Component {
                 {!repos
                     ? <Loading />
                     : <RepoGrid repos={repos} />}
+                <Footer/>
             </div>
         )
     }

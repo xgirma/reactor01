@@ -2,6 +2,7 @@ import React from'react';
 import PropTypes from'prop-types';
 import { Link } from'react-router-dom';
 import PlayerPreview from'./PlayerPreview';
+import Footer from './Footer';
 
 class PlayerInput extends React.Component {
     state = {
@@ -133,6 +134,8 @@ class Battle extends React.Component {
                     }}>
                     Battle
                 </Link>}
+
+                <Footer/>
             </div>
         )
     }

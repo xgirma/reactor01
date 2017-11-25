@@ -28,3 +28,5 @@ Tyler's React Fundamentals Video Project with Modern JavaScript
 [12. Async Await in JavaScript (ES2017)](https://github.com/xgirma/reactor01/tree/ch.12/12)
 
 [13. API request with fetch](https://github.com/xgirma/reactor01/tree/ch.13/13)
+
+HOSTED @ https://reactor-01.firebaseapp.com/
