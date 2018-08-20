@@ -62,10 +62,12 @@ Because `formatDate` function is nested inside our `getDate` function still have
 ````javascript
 function multiply(first, second){
   var multiple = [];
+  
   for(var i = 0; i < first.length; i++){
     var result = first[i] * second[i];
     multiple.push(result);
   }
+  
   console.log('i: ', i);
   console.log('result: ', result);
   

@@ -1,12 +1,12 @@
 function getDate() {
-    var date = new Date();
-
-    function formatDate() {
-        console.log('inside nested function: ', date);
-        return date.toDateString().slice(4);
-    }
-
-    return formatDate();
+  var date = new Date();
+  
+  function formatDate() {
+    console.log('inside nested function: ', date);
+    return date.toDateString().slice(4);
+  }
+  
+  return formatDate();
 }
 
 getDate();

@@ -1,24 +1,24 @@
-function discountedPrices (prices, discount) {
-    var i;
-    var discountedPrice;
-    var finalPrice;
-
-
-    discounted = [];
-    for(i = 0; i < prices.length; i++){
-        discountedPrice = prices[i] * (1 - discount);
-        finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function discountedPrices(prices, discount) {
+  var i;
+  var discountedPrice;
+  var finalPrice;
+  
+  
+  discounted = [];
+  for (i = 0; i < prices.length; i++) {
+    discountedPrice = prices[i] * (1 - discount);
+    finalPrice = Math.round(discountedPrice * 100) / 100;
+    discounted.push(finalPrice);
+  }
+  
+  console.log('i: ', i);
+  console.log('discountedPrice: ', discountedPrice);
+  console.log('finalPrice: ', finalPrice);
+  
+  return discounted;
 }
 
-console.log(discountedPrices([100,200,300], .5));
+console.log(discountedPrices([100, 200, 300], .5));
 console.log('last: ', discounted);
 // i:  3
 // discountedPrice:  150

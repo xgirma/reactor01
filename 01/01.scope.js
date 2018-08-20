@@ -1,6 +1,6 @@
 function getDate() {
-    var date = new Date();
-    return date;
+  var date = new Date();
+  return date;
 }
 
 getDate();
