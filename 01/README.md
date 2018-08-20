@@ -21,7 +21,7 @@ Defines where `variables` and `functions` are accessible inside of your program.
 
 > If the variable statement occurs inside a FunctionDeclaration, the variables are defined with function-local scope in that function. Otherwise, they are defined with global scope, that is, they are created as members of the global object. -ECMAScript Spec
 
-if you created a `var` it is scoped to a function that `var` is created and any nested functions. If you created a variable with out using `var` that variable is coped to the global object. 
+If you created a `var` it is scoped to a function that `var` is created and any `nested` functions. If you created a variable with out using `var` that variable is coped to the global object. 
 
 1. scoped to a function 
 ````javascript
@@ -32,10 +32,10 @@ function getDate() {
 
 getDate();
 console.log(date);
-// ReferenceError: date is not defined
+// Uncaught ReferenceError: date is not defined
 ````
 
-We get reference error because we created the `date` variable inside the `getDate` function. 
+We get reference error because we created the `date` variable inside the `getDate` function. But not in the global object.
 
 2. scoped to a nested function
 
@@ -54,34 +54,31 @@ function getDate() {
 getDate();
 console.log('outside: ', date);
 // inside nested function:  2017-11-16T09:06:00.589Z
-// ReferenceError: date is not defined
+// Uncaught ReferenceError: date is not defined
 ```
 Because `formatDate` function is nested inside our `getDate` function still have access to the variable `date`. But outside we do not have access to it, because `date` is scoped to the `getDate` function. 
 
 3. what about block-scope prop inside a function
 ````javascript
-function discountedPrices (prices, discount) {
-    var discounted = [];
-    for(var i = 0; i < prices.length; i++){
-        var discountedPrice = prices[i] * (1 - discount);
-        var finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function multiply(first, second){
+	var multipl = [];
+	for(var i = 0; i < first.length; i++){
+		var result = first[i] * second[i]
+		multipl.push(result);
+	}
+	console.log('i: ', i);
+	console.log('result: ', result);
+	
+	return multipl;
 }
 
-console.log(discountedPrices([100,200,300], .5));
+console.log(multiply([1,2,3], [4,5,6]));
 // i:  3
-// discountedPrice:  150
+// result:  18
 // finalPrice:  150
-// [ 50, 100, 150 ]
+// [ 4, 10, 18 ]
 ````
-What is wired is we still have access to the three variables even if we are outside of the `for` loop. It does not do us any good, eventually it might even cause us some error. But because functions are declared with the `var` keyword are `function-scoped` the three variables are accessable inside the `discountedPrices` function. 
+What is wired !!! We still have access to `i` and `result` even if we are outside of the `for` loop. It does not do us any good, eventually it might even cause us some error. But because functions are declared with the `var` keyword are `function-scoped` the two variables are accessible inside the `multiply` function. 
 
 ## Hoisting
 When the JavaScript interpreter evaluates your code it will move all `function declarations` and `variable declarations` to the top of the `current-scope` this is refereed to as hoisting. 
