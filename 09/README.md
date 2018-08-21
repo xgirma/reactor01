@@ -296,7 +296,7 @@ render() {
                     <button
                         className='reset'
 -                       onClick={this.handleReset.bind(this, 'playerOne')}>
-+                        onClick={() => this.handleReset('playerOne')}>
++                       onClick={() => this.handleReset('playerOne')}>
                         Reset
                     </button>
 
@@ -382,7 +382,7 @@ function SelectLanguage (props) {
 **To:**
 ```diff
 - function SelectLanguage (props) {
-+ function SelectLanguage ({ selectedLanguage, onSelect}) { // :v: :v: :v:
++ function SelectLanguage ({ selectedLanguage, onSelect}) {
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
     return (
         <div>
@@ -416,7 +416,7 @@ function calculateScore (profile, repos) {
 }
 ```
 **To:**
-```javascript
+```diff
 - function calculateScore (profile, repos) {
 -    let followers = profile.followers;
 -    let totalStars = getStarCount(repos);
