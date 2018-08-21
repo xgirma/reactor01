@@ -121,7 +121,6 @@ export async function fetchPopularRepos(language) {
 +   const repos = await response.json(); // don't forget await
 
 -   return repos.data.items;
-
 +   return repos.items;
 }
 ```
