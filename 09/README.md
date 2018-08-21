@@ -54,6 +54,15 @@ function getProfile (username) {
 
 ## Destructuring Object
 From:
+```javascript
+function getProfile (username) {
+    return axios.get(`https://api.github.com/users/${username}`)
+        .then(function (user) {
+          return user.data;
+       })
+}
+```
+To:
 ```diff
 function getProfile (username) {
     return axios.get(`https://api.github.com/users/${username}`)
@@ -61,13 +70,6 @@ function getProfile (username) {
 -          return user.data;
 -        })
 +        .then((user) =>  user.data)
-}
-```
-To:
-```javascript
-function getProfile (username) {
-    return axios.get(`https://api.github.com/users/${username}`)
-        .then(({ data }) =>  data)
 }
 ```
 
