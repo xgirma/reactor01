@@ -1,4 +1,4 @@
-# var vs let vs const: variable declarations in ES6
+# Chapter 1 - var vs let vs const: variable declarations in ES6
 A variable declaration introduces a new identifier. 
 
 ```javascript
@@ -26,8 +26,8 @@ If you created a `var` it is scoped to a function that `var` is created and any 
 1. scoped to a function 
 ````javascript
 function getDate() {
-    var date = new Date();
-    return date;
+  var date = new Date();
+  return date;
 }
 
 getDate();
@@ -41,14 +41,14 @@ We get reference error because we created the `date` variable inside the `getDat
 
 ```javascript
 function getDate() {
-    var date = new Date();
-
-    function formatDate() {
-        console.log('inside nested function: ', date);
-        return date.toDateString().slice(4);
-    }
-
-    return formatDate();
+  var date = new Date();
+  
+  function formatDate() {
+    console.log('inside nested function: ', date);
+    return date.toDateString().slice(4);
+  }
+  
+  return formatDate();
 }
 
 getDate();
@@ -62,10 +62,12 @@ Because `formatDate` function is nested inside our `getDate` function still have
 ````javascript
 function multiply(first, second){
   var multiple = [];
+  
   for(var i = 0; i < first.length; i++){
     var result = first[i] * second[i];
     multiple.push(result);
   }
+  
   console.log('i: ', i);
   console.log('result: ', result);
   
@@ -97,94 +99,82 @@ console.log(hoisted) // undefined
 Why this happened? I don't really know and honestly I do not really care. 6:13. :joy: :joy: :joy: :joy: :joy:
 
 ````javascript
-function discountedPrices (prices, discount) {
-    var discounted;
-    var i;
-    var discountedPrice;
-    var finalPrice;
-
-
-    discounted = [];
-    for(i = 0; i < prices.length; i++){
-        discountedPrice = prices[i] * (1 - discount);
-        finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function multiply(first, second) {
+  var multiple;
+  var i;
+  
+  multiple = [];
+  for (i = 0; i < first.length; i++) {
+    var result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
 }
 
-console.log(discountedPrices([100,200,300], .5));
-console.log(discounted);
+console.log(multiply([1, 2, 3], [4, 5, 6]));
 // i:  3
-// discountedPrice:  150
-// finalPrice:  150
-// [ 50, 100, 150 ]
-// ReferenceError: discounted is not defined
+// result:  18
+// [ 4, 10, 18 ]
 ````
 
-if you do not declare a variable without the `var` keyword, it will become attached to the global-scope, the reason for that is `hoisting`. 
+If you do not declare a variable without the `var` keyword, it will become attached to the global-scope, the reason for that is `hoisting`. 
 
 your code
 ```javascript
-function discountedPrices (prices, discount) {
-    discounted = [];
-    for( var i = 0; i < prices.length; i++){
-        var discountedPrice = prices[i] * (1 - discount);
-        var finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function multiply(first, second) {
+  multiple = [];
+  
+  for (var i = 0; i < first.length; i++) {
+    var result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
 }
 
-console.log(discountedPrices([100,200,300], .5));
-console.log('last: ', discounted);
+console.log(multiply([1, 2, 3], [4, 5, 6]));
+console.log(multiple);
 // i:  3
-// discountedPrice:  150
-// finalPrice:  150
-// [ 50, 100, 150 ]
-// last:  [ 50, 100, 150 ]
+// result:  18
+// [ 4, 10, 18 ]
+// [ 4, 10, 18 ]
 ```
 interpreted as 
 ```javascript
-function discountedPrices (prices, discount) {
-    var i;
-    var discountedPrice;
-    var finalPrice;
+global.multiple;
 
-
-    discounted = [];
-    for(i = 0; i < prices.length; i++){
-        discountedPrice = prices[i] * (1 - discount);
-        finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function multiply(first, second) {
+  var i;
+  var result;
+  
+  multiple = [];
+  
+  for (i = 0; i < first.length; i++) {
+    result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
 }
 
-console.log(discountedPrices([100,200,300], .5));
-console.log('last: ', discounted);
+console.log(multiply([1, 2, 3], [4, 5, 6]));
+console.log(multiple);
 // i:  3
-// discountedPrice:  150
-// finalPrice:  150
-// [ 50, 100, 150 ]
-// last:  [ 50, 100, 150 ]
+// result:  18
+// [ 4, 10, 18 ]
+// [ 4, 10, 18 ]
 ```
-What the JavaScript interpreter is going to do look for `discount` declaration inside the `discountedPrices` and it will not find one, because we left-off the `var` keyword. Then it will go to the parent, it will repeat that process all the way to the `global-scope` and once it does not find a declaration for `discount`, it will add `discounted` as a property to the `global-scope`. 
+What the JavaScript interpreter is going to do look for `multiple` declaration inside the `multiply` function and it will not find one, because we left-off the `var` keyword. Then it will go to the parent, next parent ... It will repeat that process all the way to the `global-scope` and once it does not find a declaration for `multiple`, it will add `multiple` as a property to the `global-scope`. 
 
 ## How dose var compare to let and const
 The main difference between `var` and `let`
@@ -197,34 +187,32 @@ The main difference between `var` and `let`
 In the previous example 
 
 ```javascript
-    console.log('i: ', i); // 50
-    console.log('discountedPrice: ', discountedPrice); // 100
-    console.log('finalPrice: ', finalPrice); // 150
+  console.log('i: ', i); // 3
+  console.log('result: ', result); // 18
 ```
-give us `[ 50, 100, 150 ]` because they are declared with the `var` keyword and therefore they are function scoped. If we change all of `var` into `let` what will happen? 
+give us `[ 4, 10, 18 ]` because they are declared with the `var` keyword and therefore they are function scoped. If we change all of `var` into `let` what will happen? 
 
 ```javascript
-function discountedPrices (prices, discount) {
-    let discounted = [];
-    for(let i = 0; i < prices.length; i++){
-        let discountedPrice = prices[i] * (1 - discount);
-        let finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function multiply(first, second){
+  var multiple = [];
+  
+  for(let i = 0; i < first.length; i++){
+    let result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
 }
 
-console.log(discountedPrices([100,200,300], .5));
+console.log(multiply([1,2,3], [4,5,6]));
 // console.log('i: ', i);
 //                    ^
-// ReferenceError: i is not defined
+// Uncaught ReferenceError: i is not defined
 ```
-Because `i` is scoped to the `for` loop block only. 
+Because `i` is scoped to the `for` loop block ONLY. 
 
 The second main difference between `var` and `let` is because of hoisting
 
@@ -237,25 +225,25 @@ Try to reference a variable before they are declared
         
 your code
 ```javascript
-console.log(hoisted) // undefined
-var hoisted
+console.log(hoisted); // undefined
+var hoisted;
 ```
 interpreted as
 ```javascript
-var hoisted
-console.log(hoisted) // undefined
+var hoisted;
+console.log(hoisted);
 ```
 so when the hoisted variable gets logged we get `undefined`.
 
 your code
 ```javascript
-console.log(hoisted) // ReferenceError
-let hoisted
+console.log(hoisted); // Uncaught ReferenceError: hoisted is not defined
+let hoisted;
 ```
 interpreted as
 ```javascript
-let hoisted
-console.log(hoisted) // ReferenceError
+let hoisted;
+console.log(hoisted);
 ```
 
 ## How does let and const compare
@@ -270,18 +258,22 @@ y = 230;
 //   ^
 ```
 
-NB: we can not reassign-new value for a variable declared with `const`.
+We can not reassign new value for a variable declared with `const`.
 
 ```javascript
 const person = {
     name: 'Tome'
 };
+
 console.log(person);
+
 person.name = 'Tyler';
+person.age = 33;
+
 console.log(person);
 
 // { name: 'Tome' }
-// { name: 'Tyler' }
+// { name: 'Tyler', age: 33 }
 ```
 This works because I am not `re-assigning` the object, instead I am modifying a property. But I cant `re-assign` the `person` object. 
 
@@ -289,12 +281,99 @@ This works because I am not `re-assigning` the object, instead I am modifying a 
 const person = {
     name: 'Tome'
 };
+
 console.log(person);
+
 person = {};
+
 console.log(person);
 
 // { name: 'Tome' }
 // person = {};
 //        ^
-// TypeError: Assignment to constant variable.
+// Uncaught TypeError: Assignment to constant variable.
 ```
+
+## New variable declarations with let and const
+
+If you're coming to JavaScript from another programming language a "feature" of JavaScript that will probably throw you off is that JavaScript is function scoped. What that means is that only functions introduce new scopes.
+
+```javascript
+// global Scope
+var firstFunction = function () {
+  // firstFunction's Scope
+  
+  var secondFunction = function () {
+    // secondFunction's Scope
+  };
+};
+```
+
+In the code above we have three scopes. The Global Scope, firstFunction's scope, and secondFunction's scope. Any child scopes have access to every one of their parents scope. Any example of this can be seen below.
+
+```javascript
+function doThing() {
+  var num = 1;
+  
+  if (num >= 0) {
+    var secondNum = 2;
+    console.log(num); // 1
+    console.log(secondNum); // 2
+  }
+  
+  console.log(num); // 1
+  console.log(secondNum); // 2
+}
+
+doThing();
+```
+Now the reason I'm putting so much emphasis on scope is because that's the biggest differentiator between var and let. let allows you to have code which is block scoped, meaning anywhere we have an opening and closing curly brace we're creating a new scope.
+
+```javascript
+function doThing() {
+  var num = 1;
+  
+  if (num >= 0) {
+    let secondNum = 2;
+    console.log(num); // 1
+    console.log(secondNum); // 2
+  }
+  
+  console.log(num); // 1
+  console.log(secondNum); // Uncaught ReferenceError: secondNum is not defined
+}
+
+doThing();
+```
+It's generally agreed upon that block scope is a better paradigm than function scope which is why organizations like Mozilla have been primarily using `let` internally for years.
+
+Now that brings us to `const`. Everything `let` has, `const` also has. The only difference is that when you create a variable with const, that variable can't be reassigned a new reference. Notice I didn't say that variable is immutable.
+
+```javascript
+const user = {
+  name: 'Tyler',
+  age: 25
+};
+
+user.name = 'Joey'
+```
+
+The code above is valid. We're not reassigning the reference to user, we're just reassigning a specific value.
+
+```javascript
+const user = {
+  name: 'Tyler',
+  age: 25
+};
+
+user = {
+  name: 'Joey', 
+  age: 25
+}
+```
+
+Now this will throw a "user is already defined" error (`specifically Uncaught TypeError: Assignment to constant variable.`) since we're trying to `reassign the actual reference`.
+
+As far as "Which one should I use?", here's what I do. I always default with const, if I'm mutating the variable, I'll use let. Rarely do I ever use var. Even though const isn't purely immutable, whenever I see a const variable I treat it as such.
+
+### >>> Object and Array Destructuring in JavaScript. ES6 | ES2015
