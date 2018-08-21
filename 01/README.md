@@ -376,4 +376,4 @@ Now this will throw a "user is already defined" error (`specifically Uncaught Ty
 
 As far as "Which one should I use?", here's what I do. I always default with const, if I'm mutating the variable, I'll use let. Rarely do I ever use var. Even though const isn't purely immutable, whenever I see a const variable I treat it as such.
 
-### >>> Object and Array Destructuring in JavaScript. ES6 | ES2015
+>>> [Object and Array Destructuring in JavaScript. ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/02)
