@@ -50,4 +50,8 @@
 2. objectify ES5
 
 3. objectify ES6: computed property names in JavaScript
+
+4. template literals/Strings `${xyz}`, multi-line
+
+5. 
  
