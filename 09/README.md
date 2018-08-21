@@ -14,7 +14,7 @@
     12. Var used only once
     
 ## String template 
-From:
+**From:**
 ```javascript
 function getProfile (username) {
     return axios.get('https://api.github.com/users/' + username)
@@ -23,7 +23,7 @@ function getProfile (username) {
         })
 }
 ```
-To:
+**To:**
 ````diff
 function getProfile (username) {
 -    return axios.get('https://api.github.com/users/' + username)
@@ -35,7 +35,7 @@ function getProfile (username) {
 ````
 
 ## Arrow function implicit return
-From:
+**From:**
 ```javascript
 function getProfile (username) {
     return axios.get(`https://api.github.com/users/${username}`)
@@ -44,7 +44,7 @@ function getProfile (username) {
         })
 }
 ```
-To:
+**To:**
 ```diff
 function getProfile (username) {
     return axios.get(`https://api.github.com/users/${username}`)
@@ -56,7 +56,7 @@ function getProfile (username) {
 ```
 
 ## Destructuring Object
-From:
+**From:**
 ```javascript
 function getProfile (username) {
     return axios.get(`https://api.github.com/users/${username}`)
@@ -65,7 +65,7 @@ function getProfile (username) {
        })
 }
 ```
-To:
+**To:**
 ```diff
 function getProfile (username) {
     return axios.get(`https://api.github.com/users/${username}`)
@@ -77,7 +77,7 @@ function getProfile (username) {
 ```
 
 ## Destructing array
-From:
+**From:**
 ```javascript
 function getUserData (player) {
     return axios.all([
@@ -94,7 +94,7 @@ function getUserData (player) {
     })
 }
 ```
-To:
+**To:**
 ```diff
 function getUserData (player) {
     return Promise.all([
@@ -111,7 +111,7 @@ function getUserData (player) {
 ```
 
 ## Shorthand Notation
-From
+**From:**
 ```javascript
 function getUserData (player) {
     return Promise.all([
@@ -123,7 +123,7 @@ function getUserData (player) {
     }))
 }
 ```
-To
+**To:**
 ```diff
 function getUserData (player) {
     return Promise.all([
@@ -138,7 +138,7 @@ function getUserData (player) {
 ```
 
 ## Remove keyword function (shorthand method name)
-From:
+**From:**
 ```javascript
 module.exports = {
     battle: function (players) {
@@ -148,11 +148,11 @@ module.exports = {
     },
 };
 ```
-To:
+**To:**
 ````diff
 module.exports = {
 -   battle: function (players) {
-+    battle (players) {
++   battle (players) {
         return Promise.all(players.map(getUserData))
             .then(sortPlayers)
             .catch(handleError)
@@ -161,7 +161,7 @@ module.exports = {
 ````
 
 ## Grab props and states top of render method
-From
+**From:**
 ```javascript
 render() {
     return (
@@ -184,7 +184,7 @@ render() {
     )
 }
 ```
-To
+**To:**
 ```diff
 render() {
 +    const { username } = this.state;
@@ -213,7 +213,7 @@ render() {
 }
 ```
 # Computed property name
-From:
+**From:**
 ```javascript
 handleSubmit(id, username) {
     this.setState(function(){
@@ -224,7 +224,7 @@ handleSubmit(id, username) {
     });
 }
 ```
-To:
+**To:**
 ```javascript
 handleSubmit(id, username) {
         this.setState(() => ({
@@ -235,7 +235,7 @@ handleSubmit(id, username) {
 ```
 
 ## Use arrow function instead of bind
-From
+**From:**
 ```javascript
 render() {
     let { match } = this.props;
@@ -269,7 +269,7 @@ render() {
     )
 }
 ```
-To: 
+**To:** 
 ```javascript
 render() {
     let { match } = this.props;
@@ -305,7 +305,7 @@ render() {
 ```
 
 # Change if/else statement into a ternary
-From 
+**From:** 
 ```javascript
 componentDidMount() {
     let stopper = this.props.text + '...';
@@ -326,7 +326,7 @@ componentDidMount() {
     }.bind(this), this.props.speed)
 }
 ```
-To
+**To:**
 ```javascript
 componentDidMount() {
     const { text, speed } = this.props;
@@ -341,7 +341,7 @@ componentDidMount() {
 }
 ```
 # Destruct props of functional componnts
-From
+**From:**
 ```javascript
 function SelectLanguage (props) {
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
@@ -363,7 +363,7 @@ function SelectLanguage (props) {
     )
 }
 ```
-To
+**To:**
 ```javascript
 function SelectLanguage ({ selectedLanguage, onSelect}) { // :v: :v: :v:
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
@@ -387,7 +387,7 @@ function SelectLanguage ({ selectedLanguage, onSelect}) { // :v: :v: :v:
 ```
 
 ## Var used only once
-From
+**From:**
 ```javascript
 function calculateScore (profile, repos) {
     let followers = profile.followers;
@@ -396,7 +396,7 @@ function calculateScore (profile, repos) {
     return (followers * 3) + totalStars;
 }
 ```
-To:
+**To:**
 ```javascript
 function calculateScore ({ followers }, repos) {
     return (followers * 3) + getStarCount(repos);
