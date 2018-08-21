@@ -203,6 +203,7 @@ class Loading extends React.Component {
             text: props.text
         };
     }
+    
     componentDidMount() {
         const { text, speed } = this.props
         const stopper = text + '...';
@@ -216,6 +217,7 @@ class Loading extends React.Component {
     componentWillUnmount() {
         window.clearInterval(this.interval);
     }
+    
     render() {
         return (
             <p style={styles.content}>
@@ -249,7 +251,7 @@ class Loading extends React.Component {
 -   }
       
 +   state = {
-+       text: this.props.text // :triumph:
++       text: this.props.text
 +   }
 
 +   static propTypes = {
@@ -272,9 +274,11 @@ class Loading extends React.Component {
                 : this.setState((prevState) => ({ text: prevState.text + '.' }))
         }, speed)
     }
+    
     componentWillUnmount() {
         window.clearInterval(this.interval);
     }
+    
     render() {
         return (
             <p style={styles.content}>
