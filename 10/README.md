@@ -1,4 +1,8 @@
-# ES6 imports, exports, modules. and named imports
+# Chapter 10 - ES6 imports, exports, modules. and named imports
+
+:arrow_left: [Chapter 9 - Refactor](https://github.com/xgirma/reactor01/tree/master/09)
+
+:arrow_right: [Chapter 11 - Class Properties (Class Fields) in JavaScript](https://github.com/xgirma/reactor01/tree/master/11)
 
 If you're reading this you're most likely familiar with the idea of modules. If not, a module is a section of self contained code that should be able to be added, removed, or edited from certain parts of your system without breaking other parts of your system. We've discovered that composing modules together is a great way to architect applications. However, up until ES6, there was no standardized way of doing this. Some patterns used to include [IIFEs](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression), CommonJS syntax (what you're used to with Node), AMD Modules, etc.
 
@@ -64,7 +68,7 @@ doAllTheMath(1,2,3) // 4
 add(1,2) // 3
 ```
 
-##named imports:
+## Named imports:
  
 Now, what if we combine the idea of imports with destructuring? We can do this with something called named imports, which look very similar. It's common to want to use just a few methods on a library, but instead of just being able to import one of two methods, you have to grab the whole thing.
 
@@ -84,3 +88,7 @@ import { Route, Link, Router } from 'react-router';
 Much cleaner and one less variable since we actually don't care about the whole ReactRouter object, just specific methods it has on it.
 
 What you've seen is just the tip of the iceberg for using destructuring but it's the most common pattern that you'll see and we'll use it consistently throughout this program.
+
+:arrow_left: [Chapter 9 - Refactor](https://github.com/xgirma/reactor01/tree/master/09)
+
+:arrow_right: [Chapter 11 - Class Properties (Class Fields) in JavaScript](https://github.com/xgirma/reactor01/tree/master/11)
