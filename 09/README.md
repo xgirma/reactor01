@@ -273,7 +273,7 @@ render() {
 }
 ```
 **To:** 
-```javascript
+```diff
 render() {
     let { match } = this.props;
     const { playerOneName, playerTwoName, playerOneImage, playerTwoImage } = this.state;
@@ -295,7 +295,8 @@ render() {
                 >
                     <button
                         className='reset'
-                        onClick={() => this.handleReset('playerOne')}>
+-                       onClick={this.handleReset.bind(this, 'playerOne')}>
++                        onClick={() => this.handleReset('playerOne')}>
                         Reset
                     </button>
 
@@ -330,20 +331,32 @@ componentDidMount() {
 }
 ```
 **To:**
-```javascript
+```diff
 componentDidMount() {
     const { text, speed } = this.props;
     const stopper = text + '...';
 
     this.interval = window.setInterval(() => {
-        this.state.text === stopper
-            ? this.setState(() => ({ text }))
-            : this.setState((previousState) => ({ text: previousState.text + '.' }))
-
+-      if(this.state.text === stopper){
+-                  this.setState(function () {
+-                      return {
+-                          text: this.props.text
+-                      }
+-                  })
+-              } else {
+-                  this.setState(function(previousState) {
+-                      return {
+-                          text: previousState.text + '.'
+-                      }
+-                  })
+-              }
++        this.state.text === stopper
++            ? this.setState(() => ({ text }))
++            : this.setState((previousState) => ({ text: previousState.text + '.' }))
     }, speed)
 }
 ```
-# Destruct props of functional componnts
+# Destruct props of functional component
 **From:**
 ```javascript
 function SelectLanguage (props) {
@@ -367,8 +380,9 @@ function SelectLanguage (props) {
 }
 ```
 **To:**
-```javascript
-function SelectLanguage ({ selectedLanguage, onSelect}) { // :v: :v: :v:
+```diff
+- function SelectLanguage (props) {
++ function SelectLanguage ({ selectedLanguage, onSelect}) { // :v: :v: :v:
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
     return (
         <div>
@@ -376,9 +390,11 @@ function SelectLanguage ({ selectedLanguage, onSelect}) { // :v: :v: :v:
                 {languages.map((lang) => {
                     return (
                         <li
-                            style={lang === selectedLanguage? { color: '#d0021b'}: null}
+-                           style={lang === props.selectedLanguage? { color: '#d0021b'}: null}
++                           style={lang === selectedLanguage? { color: '#d0021b'}: null}
                             key={lang}
-                            onClick={() => onSelect(lang)}>
+-                           onClick={props.onSelect.bind(null, lang)}>
++                           onClick={() => onSelect(lang)}>
                             {lang}
                         </li>
                     )
@@ -401,7 +417,11 @@ function calculateScore (profile, repos) {
 ```
 **To:**
 ```javascript
-function calculateScore ({ followers }, repos) {
-    return (followers * 3) + getStarCount(repos);
+- function calculateScore (profile, repos) {
+-    let followers = profile.followers;
+-    let totalStars = getStarCount(repos);
++ function calculateScore ({ followers }, repos) {
+-    return (followers * 3) + totalStars;
++    return (followers * 3) + getStarCount(repos);
 }
 ```
