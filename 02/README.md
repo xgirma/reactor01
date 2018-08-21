@@ -1,4 +1,4 @@
-# Object and Array Destructuring in JavaScript. ES6 | ES2015
+# Chapter 2 - Object and Array Destructuring in JavaScript. ES6 | ES2015
 
 :arrow_left: [Chapter 1 - var vs let vs const: variable declarations in ES6](https://github.com/xgirma/reactor01/tree/master/01)
 

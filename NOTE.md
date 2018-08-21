@@ -43,6 +43,7 @@
 9. function arguments/parameters, helps us set default values
 
 ## 20
-0. 
+0. shorthand method name
 
+1. shorthand property name
  

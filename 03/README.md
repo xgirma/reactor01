@@ -1,4 +1,9 @@
-# Shorthand Property and Method Names in JavaScript ES6 | ES2015
+# Chapter 3 - Shorthand Property and Method Names in JavaScript ES6 | ES2015
+
+:arrow_left: [Chapter 2 - Object and Array Destructuring in JavaScript. ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/02)
+
+:arrow_right: [Chapter 4 - Computed Property Names in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/04)
+
 Objective is to make Object more concise. They are syntactical sugar, not necessary but it is nice.
 
 ## Shorthand Method Names
@@ -55,3 +60,7 @@ function getUser (username) {
   }
 }
 ```
+
+:arrow_left: [Chapter 2 - Object and Array Destructuring in JavaScript. ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/02)
+
+:arrow_right: [Chapter 4 - Computed Property Names in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/04)
