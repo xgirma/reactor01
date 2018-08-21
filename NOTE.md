@@ -61,5 +61,10 @@
 
 8. arrow function and `this` statement
 
-9.  
+9. arrow function concise syntax
+
+## 30
+0. arrow function sharing lexical "this" with the parent scope
+
+1. 
  
