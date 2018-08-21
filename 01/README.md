@@ -118,7 +118,6 @@ function multiply(first, second) {
 console.log(multiply([1, 2, 3], [4, 5, 6]));
 // i:  3
 // result:  18
-// finalPrice:  150
 // [ 4, 10, 18 ]
 ````
 
@@ -144,7 +143,6 @@ console.log(multiply([1, 2, 3], [4, 5, 6]));
 console.log(multiple);
 // i:  3
 // result:  18
-// finalPrice:  150
 // [ 4, 10, 18 ]
 // [ 4, 10, 18 ]
 ```
@@ -173,7 +171,6 @@ console.log(multiply([1, 2, 3], [4, 5, 6]));
 console.log(multiple);
 // i:  3
 // result:  18
-// finalPrice:  150
 // [ 4, 10, 18 ]
 // [ 4, 10, 18 ]
 ```
@@ -190,34 +187,32 @@ The main difference between `var` and `let`
 In the previous example 
 
 ```javascript
-    console.log('i: ', i); // 50
-    console.log('discountedPrice: ', discountedPrice); // 100
-    console.log('finalPrice: ', finalPrice); // 150
+  console.log('i: ', i); // 3
+  console.log('result: ', result); // 18
 ```
-give us `[ 50, 100, 150 ]` because they are declared with the `var` keyword and therefore they are function scoped. If we change all of `var` into `let` what will happen? 
+give us `[ 4, 10, 18 ]` because they are declared with the `var` keyword and therefore they are function scoped. If we change all of `var` into `let` what will happen? 
 
 ```javascript
-function discountedPrices (prices, discount) {
-    let discounted = [];
-    for(let i = 0; i < prices.length; i++){
-        let discountedPrice = prices[i] * (1 - discount);
-        let finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function multiply(first, second){
+  var multiple = [];
+  
+  for(let i = 0; i < first.length; i++){
+    let result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
 }
 
-console.log(discountedPrices([100,200,300], .5));
+console.log(multiply([1,2,3], [4,5,6]));
 // console.log('i: ', i);
 //                    ^
-// ReferenceError: i is not defined
+// Uncaught ReferenceError: i is not defined
 ```
-Because `i` is scoped to the `for` loop block only. 
+Because `i` is scoped to the `for` loop block ONLY. 
 
 The second main difference between `var` and `let` is because of hoisting
 
@@ -230,25 +225,25 @@ Try to reference a variable before they are declared
         
 your code
 ```javascript
-console.log(hoisted) // undefined
-var hoisted
+console.log(hoisted); // undefined
+var hoisted;
 ```
 interpreted as
 ```javascript
-var hoisted
-console.log(hoisted) // undefined
+var hoisted;
+console.log(hoisted);
 ```
 so when the hoisted variable gets logged we get `undefined`.
 
 your code
 ```javascript
-console.log(hoisted) // ReferenceError
-let hoisted
+console.log(hoisted); // Uncaught ReferenceError: hoisted is not defined
+let hoisted;
 ```
 interpreted as
 ```javascript
-let hoisted
-console.log(hoisted) // ReferenceError
+let hoisted;
+console.log(hoisted);
 ```
 
 ## How does let and const compare
