@@ -77,7 +77,7 @@ function getRepos(username) {
 
 `axios` wrap our response inside a `data` property, but `fetch` does not do that. 
 
-From
+**From:**
 ```javascript
 function getStarCount(repos) {
     return repos.data.reduce((count, {stargazers_count}) => count + stargazers_count, 0);
@@ -86,9 +86,8 @@ function getStarCount(repos) {
 
 `repos` is not going to have `.data` so we need to remove that. 
 
-To: 
-
-```javascript
+**To:**
+```diff
 function getStarCount(repos) {
 -  return repos.data.reduce((count, {stargazers_count}) => count + stargazers_count, 0);
 +  return repos.reduce((count, {stargazers_count}) => count + stargazers_count, 0);
@@ -97,7 +96,7 @@ function getStarCount(repos) {
 
 More example
 
-From:
+**From:**
 ````javascript
 export async function fetchPopularRepos(language) {
     const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`);
@@ -108,8 +107,8 @@ export async function fetchPopularRepos(language) {
     return repos.data.items;
 }
 ````
-To: 
-```javascript
+**To:** 
+```diff
 export async function fetchPopularRepos(language) {
   const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`);
     
