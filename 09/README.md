@@ -35,7 +35,7 @@ function getProfile (username) {
 ````
 
 ## Arrow function implicit return
-From
+From:
 ```javascript
 function getProfile (username) {
     return axios.get(`https://api.github.com/users/${username}`)
@@ -45,7 +45,7 @@ function getProfile (username) {
 }
 ```
 To:
-```javascript
+```diff
 function getProfile (username) {
     return axios.get(`https://api.github.com/users/${username}`)
         .then((user) =>  user.data)
@@ -54,10 +54,13 @@ function getProfile (username) {
 
 ## Destructuring Object
 From:
-```javascript
+```diff
 function getProfile (username) {
     return axios.get(`https://api.github.com/users/${username}`)
-        .then((user) =>  user.data)
+-        .then(function (user) {
+-          return user.data;
+-        })
++        .then((user) =>  user.data)
 }
 ```
 To:
