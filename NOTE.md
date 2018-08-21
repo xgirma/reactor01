@@ -84,7 +84,7 @@
 
 9. `class-properties`: using `babel-plugin-transform-class-properties`: compiled
 
-# 40
+## 40
 0. react class with constructor, bind, state, class method, propTypes, defaultProps
 
 1. react class with class-properties, state, class method, propTypes, defaultProps
