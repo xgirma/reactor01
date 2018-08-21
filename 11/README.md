@@ -1,34 +1,6 @@
 # Class Properties (Class Fields) in JavaScript
 
-   >[add class properties transform from babel](https://babeljs.io/docs/plugins/transform-class-properties/)
-    
-Example: 
-```javascript
-  class Bork {
-    //Property initializer syntax
-    instanceProperty = "bork";
-    boundFunction = () => {
-      return this.instanceProperty;
-    }
-
-    //Static class properties
-    static staticProperty = "babelIsCool";
-    static staticFunction = function() {
-      return Bork.staticProperty;
-    }
-  }
-
-  let myBork = new Bork;
-
-  //Property initializers are not on the prototype.
-  console.log(myBork.__proto__.boundFunction); // > undefined
-
-  //Bound functions are bound to the class instance.
-  console.log(myBork.boundFunction.call(undefined)); // > "bork"
-
-  //Static function exists on the class.
-  console.log(Bork.staticFunction()); // > "babelIsCool"
-``` 
+   >[add class properties transform from babel](https://babeljs.io/docs/plugins/transform-class-properties/) using babel-plugin-transform-class-properties
 
 What it is going to allow us to add `specifc properties` to our components, to not only make it easier to manage state in our app, 
 we can also forget about `.bind` specifically to make sure that methods are being called in correct context. 
@@ -43,15 +15,7 @@ And it to `package.josn`
 {
   "name": "reactor01",
   "version": "1.0.0",
-  "description": "Tyler's React Fundamentals Video Project with Modern JavaScript",
-  "main": "index.js",
-  "scripts": {
-    "create": "webpack",
-    "start": "webpack-dev-server --open",
-    "build": "NODE_ENV='production' webpack -p",
-    "firebase-init": "firebase login && firebase init",
-    "deploy": "npm run build && firebase deploy"
-  },
+  "//": "more ...",
   "babel": {
     "presets": [
       "env",
@@ -60,14 +24,13 @@ And it to `package.josn`
     "plugins": [
       "transform-class-properties"
     ]
-  },
-  "//": "more ..."
+  }
 }
 ```
 
 We will refactor any component that have `state`, or that has `prop` types or `default props`. 
 
-From:
+**From:**
 ```javascript
 class PlayerInput extends React.Component {
     constructor(props) {
@@ -84,6 +47,7 @@ class PlayerInput extends React.Component {
 
         this.setState(() => ({ username: value }))
     }
+    
     handleSubmit(event) {
         event.preventDefault();
 
@@ -92,6 +56,7 @@ class PlayerInput extends React.Component {
             this.state.username
         );
     }
+    
     render() {
         const { username } = this.state
         const { label } = this.props
@@ -141,27 +106,38 @@ never change they will be static.
  
 
 To:
-````javascript
+````diff
 class PlayerInput extends React.Component {
-    state = {
-        username: ''
-    }
+-    constructor(props) {
+-        super(props);
+-        this.state = {
+-            username: ''
+-        };
+-
+-        this.handleChange = this.handleChange.bind(this);
+-        this.handleSubmit = this.handleSubmit.bind(this);
+-    }
+ 
++    state = {
++        username: ''
++    }
 
-    static propTypes = {
-        id: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
-        onSubmit: PropTypes.func.isRequired,
-    }
++    static propTypes = {
++        id: PropTypes.string.isRequired,
++        label: PropTypes.string.isRequired,
++        onSubmit: PropTypes.func.isRequired,
++    }
 
-    static defaultProps = {
-        label: 'Username',
-    }
++    static defaultProps = {
++        label: 'Username',
++    }
 
     handleChange = (event) => {
         const value = event.target.value;
 
         this.setState(() => ({ username: value }))
     }
+    
     handleSubmit = (event) => {
         event.preventDefault();
 
@@ -196,6 +172,16 @@ class PlayerInput extends React.Component {
         )
     }
 }
+
+- PlayerInput.propTypes = {
+-    id: PropTypes.string.isRequired,
+-    label: PropTypes.string.isRequired,
+-    onSubmit: PropTypes.func.isRequired,
+- }
+
+- PlayerInput.defaultProps = {
+-    label: 'Username',
+- }
 ````
 
 More example
