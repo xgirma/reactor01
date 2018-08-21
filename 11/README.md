@@ -238,7 +238,7 @@ Loading.defaultProps = {
 Notice here, we are not getting passed a `props` argument but we can still just do `this.props.text`
 
 **To:**
-```javascript
+```diff
 class Loading extends React.Component {
 -   constructor(props) {
 -       super(props);
