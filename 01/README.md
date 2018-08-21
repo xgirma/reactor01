@@ -1,4 +1,4 @@
-# var vs let vs const: variable declarations in ES6
+# Chapter 1 - var vs let vs const: variable declarations in ES6
 A variable declaration introduces a new identifier. 
 
 ```javascript
@@ -26,8 +26,8 @@ If you created a `var` it is scoped to a function that `var` is created and any 
 1. scoped to a function 
 ````javascript
 function getDate() {
-    var date = new Date();
-    return date;
+  var date = new Date();
+  return date;
 }
 
 getDate();
@@ -41,14 +41,14 @@ We get reference error because we created the `date` variable inside the `getDat
 
 ```javascript
 function getDate() {
-    var date = new Date();
-
-    function formatDate() {
-        console.log('inside nested function: ', date);
-        return date.toDateString().slice(4);
-    }
-
-    return formatDate();
+  var date = new Date();
+  
+  function formatDate() {
+    console.log('inside nested function: ', date);
+    return date.toDateString().slice(4);
+  }
+  
+  return formatDate();
 }
 
 getDate();
@@ -99,94 +99,85 @@ console.log(hoisted) // undefined
 Why this happened? I don't really know and honestly I do not really care. 6:13. :joy: :joy: :joy: :joy: :joy:
 
 ````javascript
-function discountedPrices (prices, discount) {
-    var discounted;
-    var i;
-    var discountedPrice;
-    var finalPrice;
-
-
-    discounted = [];
-    for(i = 0; i < prices.length; i++){
-        discountedPrice = prices[i] * (1 - discount);
-        finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function multiply(first, second) {
+  var multiple;
+  var i;
+  
+  multiple = [];
+  for (i = 0; i < first.length; i++) {
+    var result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
 }
 
-console.log(discountedPrices([100,200,300], .5));
-console.log(discounted);
+console.log(multiply([1, 2, 3], [4, 5, 6]));
 // i:  3
-// discountedPrice:  150
+// result:  18
 // finalPrice:  150
-// [ 50, 100, 150 ]
-// ReferenceError: discounted is not defined
+// [ 4, 10, 18 ]
 ````
 
-if you do not declare a variable without the `var` keyword, it will become attached to the global-scope, the reason for that is `hoisting`. 
+If you do not declare a variable without the `var` keyword, it will become attached to the global-scope, the reason for that is `hoisting`. 
 
 your code
 ```javascript
-function discountedPrices (prices, discount) {
-    discounted = [];
-    for( var i = 0; i < prices.length; i++){
-        var discountedPrice = prices[i] * (1 - discount);
-        var finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function multiply(first, second) {
+  multiple = [];
+  
+  for (var i = 0; i < first.length; i++) {
+    var result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
 }
 
-console.log(discountedPrices([100,200,300], .5));
-console.log('last: ', discounted);
+console.log(multiply([1, 2, 3], [4, 5, 6]));
+console.log(multiple);
 // i:  3
-// discountedPrice:  150
+// result:  18
 // finalPrice:  150
-// [ 50, 100, 150 ]
-// last:  [ 50, 100, 150 ]
+// [ 4, 10, 18 ]
+// [ 4, 10, 18 ]
 ```
 interpreted as 
 ```javascript
-function discountedPrices (prices, discount) {
-    var i;
-    var discountedPrice;
-    var finalPrice;
+global.multiple;
 
-
-    discounted = [];
-    for(i = 0; i < prices.length; i++){
-        discountedPrice = prices[i] * (1 - discount);
-        finalPrice = Math.round(discountedPrice * 100) / 100;
-        discounted.push(finalPrice);
-    }
-
-    console.log('i: ', i);
-    console.log('discountedPrice: ', discountedPrice);
-    console.log('finalPrice: ', finalPrice);
-
-    return discounted;
+function multiply(first, second) {
+  var i;
+  var result;
+  
+  multiple = [];
+  
+  for (i = 0; i < first.length; i++) {
+    result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
 }
 
-console.log(discountedPrices([100,200,300], .5));
-console.log('last: ', discounted);
+console.log(multiply([1, 2, 3], [4, 5, 6]));
+console.log(multiple);
 // i:  3
-// discountedPrice:  150
+// result:  18
 // finalPrice:  150
-// [ 50, 100, 150 ]
-// last:  [ 50, 100, 150 ]
+// [ 4, 10, 18 ]
+// [ 4, 10, 18 ]
 ```
-What the JavaScript interpreter is going to do look for `discount` declaration inside the `discountedPrices` and it will not find one, because we left-off the `var` keyword. Then it will go to the parent, it will repeat that process all the way to the `global-scope` and once it does not find a declaration for `discount`, it will add `discounted` as a property to the `global-scope`. 
+What the JavaScript interpreter is going to do look for `multiple` declaration inside the `multiply` function and it will not find one, because we left-off the `var` keyword. Then it will go to the parent, next parent ... It will repeat that process all the way to the `global-scope` and once it does not find a declaration for `multiple`, it will add `multiple` as a property to the `global-scope`. 
 
 ## How dose var compare to let and const
 The main difference between `var` and `let`

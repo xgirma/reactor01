@@ -21,3 +21,19 @@ console.log('last: ', discounted);
 // [ 50, 100, 150 ]
 // last:  [ 50, 100, 150 ]
 
+function multiply(first, second) {
+  multiple = [];
+  
+  for (var i = 0; i < first.length; i++) {
+    var result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
+}
+
+console.log(multiply([1, 2, 3], [4, 5, 6]));
+console.log(multiple);

@@ -25,3 +25,22 @@ console.log('last: ', discounted);
 // finalPrice:  150
 // [ 50, 100, 150 ]
 // last:  [ 50, 100, 150 ]
+
+
+function multiply(first, second) {
+  var multiple;
+  var i;
+  
+  multiple = [];
+  for (i = 0; i < first.length; i++) {
+    var result = first[i] * second[i];
+    multiple.push(result);
+  }
+  
+  console.log('i: ', i);
+  console.log('result: ', result);
+  
+  return multiple;
+}
+
+console.log(multiply([1, 2, 3], [4, 5, 6]));
