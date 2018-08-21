@@ -67,4 +67,13 @@
 0. arrow function sharing lexical "this" with the parent scope
 
 1. default parameter problem, if check for `falsy`, instead of `undefined`
- 
+
+2. compiling: compiling with Babel takes your code and run it through syntax transformation, in order to get browser compatible syntax. What its not doing, `it is not adding` any new method or objects you may need to the browser's global object or any JavaScript primitives
+
+3. polyfill: when you add a polyfill you `adding new functionality` to the browser
+
+4. Babel: arrow functions : compiled
+
+5. Babel: Promises : polyfilled
+
+6. 

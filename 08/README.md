@@ -1,4 +1,9 @@
-# Compiling vs Polyfills with Babel
+# Compiling vs Polyfills with Babel(Javascript)
+
+:arrow_left: [Chapter 7 - Default Parameters in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/07)
+
+:arrow_right: [Chapter 9 - Refactor](https://github.com/xgirma/reactor01/tree/master/09)
+
 JavaScript is a living language it is constantly progressing. 
 
 Compiling our code with Babel only gets our code part of the way. There is still another step for using certain new features
@@ -56,3 +61,10 @@ would not add new properties to the global namespace. Promises need to be polyfi
         Symbol
         WeakMap
         WeakSet
+        
+        
+**video**: https://www.youtube.com/watch?v=BXoiuN1a0-E
+
+:arrow_left: [Chapter 7 - Default Parameters in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/07)
+
+:arrow_right: [Chapter 9 - Refactor](https://github.com/xgirma/reactor01/tree/master/09)
