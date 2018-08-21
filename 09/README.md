@@ -425,3 +425,7 @@ function calculateScore (profile, repos) {
 +    return (followers * 3) + getStarCount(repos);
 }
 ```
+
+:arrow_left: [Chapter 8 - Compiling vs Polyfills with Babel](https://github.com/xgirma/reactor01/tree/master/08)
+
+:arrow_right: [Chapter 10 - import and export with JavaScript Modules | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/10)

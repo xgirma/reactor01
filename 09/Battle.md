@@ -1,6 +1,7 @@
 # Refactoring app/components/Battle.js
 You have to be careful with refactoring `setState`, especially when you are using `event`.
-From: :warning: :warning: :warning:
+
+**From:** :warning: :warning: :warning:
 ````javascript
 handleChange(event){
     let value = event.target.value;
@@ -13,10 +14,12 @@ handleChange(event){
 }
 ````
 
-To: :skull: :skull: :skull: 
-```javascript
-handleChange({ target }){ // :x: :x: :x:
-    let value = target.value;
+**To:** :skull: :skull: :skull: 
+```diff
+- handleChange(event){
++ handleChange({ target }){
+-    let value = event.target.value;
++    let value = target.value;
 
     this.setState(function () {
         return {
@@ -26,10 +29,17 @@ handleChange({ target }){ // :x: :x: :x:
 }
 ```
 
-To: works :v: :v: :v:
-```javascript
+**To:** works :v: :v: :v:
+```diff
 handleChange(event){
-    this.setState(() => ({ username: event.target.value })) // wrong
+-    let value = event.target.value;
+
+-    this.setState(function () {
+-        return {
+-            username: value
+-        }
+-    })
++    this.setState(() => ({ username: event.target.value }))
 }
 ```
 One thing you have to be careful with React, you can not really do the below to `events` in React specifically. 
@@ -37,7 +47,8 @@ What is going to happen here, by the time the callback `() => ({ username: event
 will be long gone. Whenever you need to pass event to a `setState` you need to make sure to capture the `event` in a variable. 
 
 Same thing below
-From;
+
+**From:**
 ```javascript
 handleSubmit(event){
     event.preventDefault();
@@ -48,9 +59,10 @@ handleSubmit(event){
     )
 }
 ```
-To: :skull: :skull: :skull:
+**To:** :skull: :skull: :skull:
 ```javascript
-    handleSubmit({ preventDefault }){ // :x: :x: :x:
+-  handleSubmit(event){
++  handleSubmit({ preventDefault }){
         this.props.onSubmit(
             this.props.id,
             this.state.username

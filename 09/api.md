@@ -1,7 +1,7 @@
 # Refactoring app/utils/api.js
 Destructuring, arrow function implicit return
 
-From
+**From:**
 ```javascript
 function getStarCount (repos) {
     return repos.data.reduce(function (count, repo) {
@@ -9,14 +9,17 @@ function getStarCount (repos) {
     }, 0)
 }
 ```
-To
-```javascript
+**To:**
+```diff
 function getStarCount ({ data }) {
-    return data.reduce((count, { stargazers_count }) =>  count + stargazers_count, 0)
+-    return repos.data.reduce(function (count, repo) {
+-        return count + repo.stargazers_count;
+-    }, 0)
++    return data.reduce((count, { stargazers_count }) =>  count + stargazers_count, 0)
 }
 ```
 ## Polyfill
-From:
+**From:**:
 ```javascript
 function getUserData (player) {
     return axios.all([

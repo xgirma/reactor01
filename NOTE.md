@@ -79,3 +79,5 @@
 6. Change if/else statement into a ternary
 
 7. shorthand notation
+
+8. do not to destruct `event`, e.g. event.target.value;
