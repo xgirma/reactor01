@@ -1,5 +1,9 @@
 # Chapter 9 - Refactoring 
 
+:arrow_left: [Chapter 8 - Compiling vs Polyfills with Babel](https://github.com/xgirma/reactor01/tree/master/08)
+
+:arrow_right: [Chapter 10 - import and export with JavaScript Modules | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/10)
+
     01. String template
     02. Arrow function: implicit return
     03. Destructuring object

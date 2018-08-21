@@ -103,7 +103,7 @@ componentDidMount() {
 }
 ```
 
-**To**
+**To:**
 ```diff
 async componentDidMount() {
     const { playerOneName, playerTwoName } = queryString.parse(this.props.location.search);

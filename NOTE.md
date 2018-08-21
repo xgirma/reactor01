@@ -91,8 +91,16 @@
 
 2. `babel-polyfill` includes support for async/await 
 
-3. `Promise` => then to `async` => `await`
+3. `Promise` => `then` to `async` => `await`
 
-4. `Promise.all` => then to `async` => `await`
+4. `Promise` => `then` => `catch` to `async` => `await` => `catch`
 
-5. 
+5. `Promise` => `then` => `catch` to `async` => `await` => `try/catch`
+
+6. `Promise.all` => `then` to `async` => `await`
+
+7. `Promise.all` => `then` => `catch` to `async` => `await` => `catch`
+
+8. `Promise.all` => `then` => `catch` to `async` => `await` => `try/catch`
+
+9. 
