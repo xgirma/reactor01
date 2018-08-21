@@ -1,25 +1,48 @@
 # Note
 
 ## 01 
-1. variables initialised with `undefined`
+0. variables initialised with `undefined`
 
-2. `global` scope vs `function` scope
+1. `global` scope vs `function` scope
 
-3. scope in `nested function`
+2. scope in `nested function`
 
-4. for(var i = 0; i < 3; i++) { ... } `console.log(i) = 3` because of `var`
+3. for(var i = 0; i < 3; i++) { ... } `console.log(i) = 3` because of `var`
 
-5. javascript interpreter hoist `function` and `variable` declarations to the top of the `current-scope`
+4. javascript interpreter hoist `function` and `variable` declarations to the top of the `current-scope`
 
-6. declare a variable without `var`, variable attached to global scope 
+5. declare a variable without `var`, variable attached to global scope 
 
-7. `var` function scoped, `let` block scoped
+6. `var` function scoped, `let` block scoped
 
-8. reference a variable before declaration result, `var` => `undefined`, `let` => `Reference Error`
+7. reference a variable before declaration result, `var` => `undefined`, `let` => `Reference Error`
 
-9. `const` same as `let` except once you assigned a value to a variable using `const` you can not re-assign new value for that variable.
+8. `const` same as `let` except once you assigned a value to a variable using `const` you can not   re-assign new value for that variable.
+
+9. You can modify the property of an object created with `const`, because it is not re-assigning, it is modifying a property.
 
 ## 10
-1. You can modify the property of an object created with `const`, because it is not re-assigning, it is modifying a property.
+0. You can not reassign an object created with `const`.
 
-2. You can not reassign an object created with `const`.
+1. add object property one at a time
+
+2. add multiple object property at the same time  
+
+3. Object destructuring: helps extract multiple properties at the same time, before destructuring there is no way to extract properties at the same time
+
+4. function destructuring 
+
+5. array destructuring
+
+6. object/function/array destructuring help fix `poorly named` object property names
+
+7. function arguments/parameters, we need to remember the order of the args
+
+8. function arguments/parameters, instead of passing args one by one, we can pass an `object` or an `array`
+
+9. function arguments/parameters, helps us set default values
+
+## 20
+0. 
+
+ 
