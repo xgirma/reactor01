@@ -225,11 +225,14 @@ handleSubmit(id, username) {
 }
 ```
 **To:**
-```javascript
+```diff
 handleSubmit(id, username) {
         this.setState(() => ({
-            [id + 'Name'] : username,
-            [id + 'Image'] : `http://github.com/${username}.png?size=200`
+-            let newState = {};
+-            newState[id + 'Name'] = username;
+-            newState[id + 'Image'] = 'http://github.com/' + username + '.png?size=200';
++            [id + 'Name'] : username,
++            [id + 'Image'] : `http://github.com/${username}.png?size=200`
         }))
     }
 ```
