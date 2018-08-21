@@ -1,5 +1,9 @@
 # Class Properties (Class Fields) in JavaScript
 
+:arrow_left: [Chapter 10 - import and export with JavaScript Modules | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/10)
+
+:arrow_right: [Chapter 12 - Async Await in JavaScript (ES2017)](https://github.com/xgirma/reactor01/tree/master/12)
+
    >[add class properties transform from babel](https://babeljs.io/docs/plugins/transform-class-properties/) using babel-plugin-transform-class-properties
 
 What it is going to allow us to add `specifc properties` to our components, to not only make it easier to manage state in our app, 
@@ -42,6 +46,7 @@ class PlayerInput extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    
     handleChange(event) {
         const value = event.target.value;
 
@@ -105,7 +110,7 @@ We also have `propTypes` and `defaultProps`, we can add them as `static` propert
 never change they will be static. 
  
 
-To:
+**To:**
 ````diff
 class PlayerInput extends React.Component {
 -    constructor(props) {
@@ -132,13 +137,15 @@ class PlayerInput extends React.Component {
 +        label: 'Username',
 +    }
 
-    handleChange = (event) => {
+-   handleChange(event) {
++   handleChange = (event) => {
         const value = event.target.value;
 
         this.setState(() => ({ username: value }))
     }
     
-    handleSubmit = (event) => {
+-   handleSubmit(event) {
++   handleSubmit = (event) => {
         event.preventDefault();
 
         this.props.onSubmit(
@@ -186,7 +193,7 @@ class PlayerInput extends React.Component {
 
 More example
 
-From: 
+**From:** 
 ```javascript
 class Loading extends React.Component {
     constructor(props) {
@@ -229,22 +236,31 @@ Loading.defaultProps = {
 };
 ```
 Notice here, we are not getting passed a `props` argument but we can still just do `this.props.text`
-To:
+
+**To:**
 ```javascript
 class Loading extends React.Component {
-    state = {
-        text: this.props.text // :triumph:
-    }
+-   constructor(props) {
+-       super(props);
+-  
+-       this.state = {
+-           text: props.text
+-       };
+-   }
+      
++   state = {
++       text: this.props.text // :triumph:
++   }
 
-    static propTypes = {
-        text: PropTypes.string.isRequired,
-        speed: PropTypes.number.isRequired,
-    };
++   static propTypes = {
++       text: PropTypes.string.isRequired,
++       speed: PropTypes.number.isRequired,
++   };
 
-    static defaultProps = {
-        text: 'Loading',
-        speed: 300
-    };
++   static defaultProps = {
++       text: 'Loading',
++       speed: 300
++   };
 
     componentDidMount() {
         const { text, speed } = this.props
@@ -267,6 +283,20 @@ class Loading extends React.Component {
         )
     }
 }
+
+- Loading.propTypes = {
+-   text: PropTypes.string.isRequired,
+-    speed: PropTypes.number.isRequired,
+- };
+
+- Loading.defaultProps = {
+-   text: 'Loading',
+-   speed: 300
+- };
 ```
 
-What is intersting about `class-properties` you can see everything inside the component/class. 
+What is interesting about `class-properties` you can see everything inside the component/class. 
+
+:arrow_left: [Chapter 10 - import and export with JavaScript Modules | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/10)
+
+:arrow_right: [Chapter 12 - Async Await in JavaScript (ES2017)](https://github.com/xgirma/reactor01/tree/master/12)

@@ -81,3 +81,8 @@
 7. shorthand notation
 
 8. do not to destruct `event`, e.g. event.target.value;
+
+9. `class-properties`: using `babel-plugin-transform-class-properties`
+
+# 40
+0. 
