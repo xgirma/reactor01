@@ -1,8 +1,11 @@
 # Chapter 1 - var vs let vs const: variable declarations in ES6
+
+>>> [Object and Array Destructuring in JavaScript. ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/02)
+
 A variable declaration introduces a new identifier. 
 
 ```javascript
-var declaration
+var declaration;
 console.log(declaration);
 // undefined
 ```
@@ -11,7 +14,7 @@ In JavaScript variables are `initalised` with `undefined` when they are created.
 Initialisation is when you first assign a value to a variable. 
 
 ```javascript
-var declaration = "initialising ..."
+var declaration = "initialising ...";
 console.log(declaration);
 // initialising ...
 ```
@@ -87,13 +90,13 @@ When the JavaScript interpreter evaluates your code it will move all `function d
 
 your code
 ```javascript
-console.log(hoisted) // undefined
+console.log(hoisted); // undefined
 var hoisted
 ```
 interpreted as
 ```javascript
-var hoisted
-console.log(hoisted) // undefined
+var hoisted;
+console.log(hoisted)
 ```
 
 Why this happened? I don't really know and honestly I do not really care. 6:13. :joy: :joy: :joy: :joy: :joy:
@@ -376,4 +379,4 @@ Now this will throw a "user is already defined" error (`specifically Uncaught Ty
 
 As far as "Which one should I use?", here's what I do. I always default with const, if I'm mutating the variable, I'll use let. Rarely do I ever use var. Even though const isn't purely immutable, whenever I see a const variable I treat it as such.
 
-### >>> Object and Array Destructuring in JavaScript. ES6 | ES2015
+>>> [Object and Array Destructuring in JavaScript. ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/02)
