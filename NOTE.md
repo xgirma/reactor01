@@ -77,3 +77,5 @@
 5. Babel: Promises : polyfilled
 
 6. Change if/else statement into a ternary
+
+7. shorthand notation

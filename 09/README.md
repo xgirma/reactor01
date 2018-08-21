@@ -124,13 +124,14 @@ function getUserData (player) {
 }
 ```
 To
-```javascript
+```diff
 function getUserData (player) {
     return Promise.all([
         getProfile(player),
         getRepos(player)
     ]).then(([profile, repos]) => ({
-            profile, // ***
+-           profile: profile,
++           profile,
             score: calculateScore(profile, repos)
     }))
 }
@@ -148,9 +149,10 @@ module.exports = {
 };
 ```
 To:
-````javascript
+````diff
 module.exports = {
-    battle (players) {
+-   battle: function (players) {
++    battle (players) {
         return Promise.all(players.map(getUserData))
             .then(sortPlayers)
             .catch(handleError)
@@ -183,20 +185,22 @@ render() {
 }
 ```
 To
-```javascript
+```diff
 render() {
-    const { username } = this.state;
-    const { label } = this.props;
++    const { username } = this.state;
++    const { label } = this.props;
 
     return (
         <form className='column' onSubmit={this.handleSubmit}>
-            <label className='header' htmlFor='username'>{label}</label>
+-            <label className='header' htmlFor='username'>{this.props.label}</label>
++            <label className='header' htmlFor='username'>{label}</label>
             <input
                 id='username'
                 placeholder='github username'
                 type='text'
                 autoComplete='off'
-                value={username} // binding the value of input field with our state
+-               value={this.state.username}
++               value={username} // binding the value of input field with our state
                 onChange={this.handleChange}
             />
             <button
