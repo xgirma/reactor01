@@ -1,5 +1,7 @@
 # Converting axios to fetch
 
+:arrow_left: [Chapter 12 - Async Await in JavaScript (ES2017)](https://github.com/xgirma/reactor01/tree/master/12)
+
         Fetch - LS
         A modern replacement for XMLHttpRequest.
         
@@ -37,7 +39,7 @@ Remember the way `axios` return data is a little bit different from `fetch` does
 way `axios` returns data is a little bit different than what `fetch` does. So what we do here instead of returning 
 `profile.data` we return a response after we made a JSON`response.json();`. 
 
-From:
+**From:**
 ````javascript
 async function getProfile(username) {
     const profile = await axios.get(`https://api.github.com/users/${username}${params}`);
@@ -45,28 +47,31 @@ async function getProfile(username) {
 }
 ```` 
 
-To:
-````javascript
+**To:**
+````diff
 async function getProfile(username) {
-    const response = await fetch(`https://api.github.com/users/${username}${params}`);
+-   const profile = await axios.get(`https://api.github.com/users/${username}${params}`);
++   const response = await fetch(`https://api.github.com/users/${username}${params}`);
     return response.json();
 }
 ````
 
 More example: we cant just return `fetch()` so let us create async function. 
 
-From
+**From:**
 ```javascript
 function getRepos(username) {
-    return axios.get(`https://api.github.com/users/${username}/repos${params}&per_page=100`);
+  return axios.get(`https://api.github.com/users/${username}/repos${params}&per_page=100`);
 }
 ```
 
-To:
-```javascript
-async function getRepos(username) {
-    const response = await fetch(`https://api.github.com/users/${username}/repos${params}&per_page=100`);
-    return response.json();
+**To:**
+```diff
+- function getRepos(username) {
++ async function getRepos(username) {
+-  return axios.get(`https://api.github.com/users/${username}/repos${params}&per_page=100`);
++  const response = await fetch(`https://api.github.com/users/${username}/repos${params}&per_page=100`);
+  return response.json();
 }
 ```
 
@@ -85,7 +90,8 @@ To:
 
 ```javascript
 function getStarCount(repos) {
-    return repos.reduce((count, {stargazers_count}) => count + stargazers_count, 0);
+-  return repos.data.reduce((count, {stargazers_count}) => count + stargazers_count, 0);
++  return repos.reduce((count, {stargazers_count}) => count + stargazers_count, 0);
 }
 ```
 
@@ -105,13 +111,20 @@ export async function fetchPopularRepos(language) {
 To: 
 ```javascript
 export async function fetchPopularRepos(language) {
-    const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`);
+  const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`);
+    
+-   const repos = await axios.get(encodedURI)
+-        .catch(handleError);
 
-    const response = await fetch(encodedURI)
-        .catch(handleError);
++   const response = await fetch(encodedURI)
++        .catch(handleError);
 
-    const repos = await response.json(); // don't forget await
++   const repos = await response.json(); // don't forget await
 
-    return repos.items;
+-   return repos.data.items;
+
++   return repos.items;
 }
 ```
+
+:arrow_left: [Chapter 12 - Async Await in JavaScript (ES2017)](https://github.com/xgirma/reactor01/tree/master/12)

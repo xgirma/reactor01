@@ -103,4 +103,7 @@
 
 8. `Promise.all` => `then` => `catch` to `async` => `await` => `try/catch`
 
-9. 
+9. `fetch` a modern replacement for XMLHttpRequest, `axios` ...
+
+#50
+0. 
