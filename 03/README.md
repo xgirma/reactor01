@@ -61,6 +61,8 @@ function getUser (username) {
 }
 ```
 
+**video**: https://www.youtube.com/watch?v=FtLRx14wl9s
+
 :arrow_left: [Chapter 2 - Object and Array Destructuring in JavaScript. ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/02)
 
 :arrow_right: [Chapter 4 - Computed Property Names in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/04)

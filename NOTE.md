@@ -46,4 +46,8 @@
 0. shorthand method name
 
 1. shorthand property name
+
+2. objectify ES5
+
+3. objectify ES6: computed property names in JavaScript
  

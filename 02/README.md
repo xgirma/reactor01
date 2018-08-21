@@ -360,6 +360,8 @@ function register (props) {
 ```
 Much better. As you can see, we're basically plucking those properties off of that object and setting them to local variables with the same name as the specific property on the object. 
 
+**video:** https://www.youtube.com/watch?v=RJaRRS27100
+
 :arrow_left: [Chapter 1 - var vs let vs const: variable declarations in ES6](https://github.com/xgirma/reactor01/tree/master/01)
 
 :arrow_right: [Chapter 3 - Shorthand Property and Method Names in JavaScript ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/03)
