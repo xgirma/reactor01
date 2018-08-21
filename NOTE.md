@@ -82,7 +82,17 @@
 
 8. do not to destruct `event`, e.g. event.target.value;
 
-9. `class-properties`: using `babel-plugin-transform-class-properties`
+9. `class-properties`: using `babel-plugin-transform-class-properties`: compiled
 
 # 40
-0. 
+0. react class with constructor, bind, state, class method, propTypes, defaultProps
+
+1. react class with class-properties, state, class method, propTypes, defaultProps
+
+2. `babel-polyfill` includes support for async/await 
+
+3. `Promise` => then to `async` => `await`
+
+4. `Promise.all` => then to `async` => `await`
+
+5. 
