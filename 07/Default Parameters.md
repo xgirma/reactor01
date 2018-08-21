@@ -7,16 +7,19 @@ function debounce (func, wait, immediate) {
   if (typeof wait === 'undefined') {
     wait = 1000
   }
-  var timeout
+  
+  var timeout;
+  
   return function () {
-    var args = arguments
+    var args = arguments;
     var later = () => {
-      timeout = null
+      timeout = null;
       if (!immediate) func.apply(this, args)
-    }
-    var callNow = immediate && !timeout
-    clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
+    };
+    
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
     if (callNow) func.apply(this, args)
   }
 }
@@ -26,16 +29,18 @@ Here we have a typical debounce function. Don't worry about the actual implement
 
 ````javascript
 function debounce (func, wait = 1000, immediate) {
-  var timeout
+  var timeout;
+  
   return function () {
-    var args = arguments
+    var args = arguments;
     var later = () => {
-      timeout = null
+      timeout = null;
       if (!immediate) func.apply(this, args)
-    }
-    var callNow = immediate && !timeout
-    clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
+    };
+    
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
     if (callNow) func.apply(this, args)
   }
 }

@@ -66,5 +66,5 @@
 ## 30
 0. arrow function sharing lexical "this" with the parent scope
 
-1. 
+1. default parameter problem, if check for `falsy`, instead of `undefined`
  
