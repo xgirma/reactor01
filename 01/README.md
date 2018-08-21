@@ -258,18 +258,22 @@ y = 230;
 //   ^
 ```
 
-NB: we can not reassign-new value for a variable declared with `const`.
+We can not reassign new value for a variable declared with `const`.
 
 ```javascript
 const person = {
     name: 'Tome'
 };
+
 console.log(person);
+
 person.name = 'Tyler';
+person.age = 33;
+
 console.log(person);
 
 // { name: 'Tome' }
-// { name: 'Tyler' }
+// { name: 'Tyler', age: 33 }
 ```
 This works because I am not `re-assigning` the object, instead I am modifying a property. But I cant `re-assign` the `person` object. 
 
@@ -277,12 +281,15 @@ This works because I am not `re-assigning` the object, instead I am modifying a 
 const person = {
     name: 'Tome'
 };
+
 console.log(person);
+
 person = {};
+
 console.log(person);
 
 // { name: 'Tome' }
 // person = {};
 //        ^
-// TypeError: Assignment to constant variable.
+// Uncaught TypeError: Assignment to constant variable.
 ```
