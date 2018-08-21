@@ -375,3 +375,5 @@ user = {
 Now this will throw a "user is already defined" error (`specifically Uncaught TypeError: Assignment to constant variable.`) since we're trying to `reassign the actual reference`.
 
 As far as "Which one should I use?", here's what I do. I always default with const, if I'm mutating the variable, I'll use let. Rarely do I ever use var. Even though const isn't purely immutable, whenever I see a const variable I treat it as such.
+
+### >>> Object and Array Destructuring in JavaScript. ES6 | ES2015
