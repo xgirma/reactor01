@@ -95,12 +95,15 @@ function getUserData (player) {
 }
 ```
 To:
-```javascript
+```diff
 function getUserData (player) {
     return Promise.all([
         getProfile(player),
         getRepos(player)
-    ]).then(([profile, repos]) => ({ // ***
+-     ]).then(function (data) {
+-       let profile = data[0];
+-       let repos = data[1];
++    ]).then(([profile, repos]) => ({
             profile: profile,
             score: calculateScore(profile, repos)
     }))
