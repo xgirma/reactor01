@@ -5,7 +5,7 @@
 A variable declaration introduces a new identifier. 
 
 ```javascript
-var declaration
+var declaration;
 console.log(declaration);
 // undefined
 ```
@@ -14,7 +14,7 @@ In JavaScript variables are `initalised` with `undefined` when they are created.
 Initialisation is when you first assign a value to a variable. 
 
 ```javascript
-var declaration = "initialising ..."
+var declaration = "initialising ...";
 console.log(declaration);
 // initialising ...
 ```
@@ -90,13 +90,13 @@ When the JavaScript interpreter evaluates your code it will move all `function d
 
 your code
 ```javascript
-console.log(hoisted) // undefined
+console.log(hoisted); // undefined
 var hoisted
 ```
 interpreted as
 ```javascript
-var hoisted
-console.log(hoisted) // undefined
+var hoisted;
+console.log(hoisted)
 ```
 
 Why this happened? I don't really know and honestly I do not really care. 6:13. :joy: :joy: :joy: :joy: :joy:
