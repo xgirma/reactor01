@@ -1,4 +1,4 @@
-# Refactoring 
+# Chapter 9 - Refactoring 
 
     01. String template
     02. Arrow function: implicit return
@@ -24,9 +24,10 @@ function getProfile (username) {
 }
 ```
 To:
-````javascript
+````diff
 function getProfile (username) {
-    return axios.get(`https://api.github.com/users/${username}`)
+-    return axios.get('https://api.github.com/users/' + username)
++    return axios.get(`https://api.github.com/users/${username}`)
         .then(function (user) {
             return user.data;
         })
@@ -124,7 +125,7 @@ function getUserData (player) {
 }
 ```
 
-## Remove keyword function
+## Remove keyword function (shorthand method name)
 From:
 ```javascript
 module.exports = {

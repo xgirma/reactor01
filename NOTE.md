@@ -76,4 +76,4 @@
 
 5. Babel: Promises : polyfilled
 
-6. 
+6. Change if/else statement into a ternary
