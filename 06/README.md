@@ -1,4 +1,8 @@
-# Arrow Function
+# Chapter 6 - Arrow Functions in JavaScript | ES6 | ES2015
+
+:arrow_left: [Chapter 5 - Template Literals (Template Strings) in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/05)
+
+:arrow_right: [Chapter 7 - Default Parameters in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/07)
 
     - less typing
     - this keyword
@@ -61,4 +65,14 @@ function getTweets (uid) {
 
 ## this keyword
 When you use arrow function you don't really need to worry about the `this` keyword, because it is not creating a new
-context. Instead it is just going to use the same `this` keyword as its parent. 
+context. Instead it is just going to use the same `this` keyword as its parent.
+
+**video**: https://www.youtube.com/watch?v=dB1KA-yz65s
+
+related videos: 
+
+- [WTF is THIS: Understanding the "this" keyword in JavaScript](https://www.youtube.com/watch?v=zE9iro4r918)
+
+:arrow_left: [Chapter 5 - Template Literals (Template Strings) in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/05)
+
+:arrow_right: [Chapter 7 - Default Parameters in JavaScript | ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/07)

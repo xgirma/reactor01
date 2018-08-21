@@ -53,5 +53,13 @@
 
 4. template literals/Strings `${xyz}`, multi-line
 
-5. 
+5. function `declaration` 
+
+6. function `expression`
+
+7. arrow function: `implicit return`, one liner with no return statement
+
+8. arrow function and `this` statement
+
+9.  
  
