@@ -1,4 +1,7 @@
 # Chapter 1 - var vs let vs const: variable declarations in ES6
+
+>>> [Object and Array Destructuring in JavaScript. ES6 | ES2015](https://github.com/xgirma/reactor01/tree/master/02)
+
 A variable declaration introduces a new identifier. 
 
 ```javascript
