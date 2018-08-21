@@ -48,7 +48,10 @@ To:
 ```diff
 function getProfile (username) {
     return axios.get(`https://api.github.com/users/${username}`)
-        .then((user) =>  user.data)
+-        .then(function (user) {
+-          return user.data;
+-        })
++        .then((user) =>  user.data)
 }
 ```
 
@@ -69,7 +72,7 @@ function getProfile (username) {
 -        .then(function (user) {
 -          return user.data;
 -        })
-+        .then((user) =>  user.data)
++        .then(({data}) =>  data)
 }
 ```
 
